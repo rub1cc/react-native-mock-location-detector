@@ -6,7 +6,7 @@ If you are building a location based app in RN, you have to validate if the user
 
 ## Getting started
 
-`$ npm install react-native-mock-location-detector --save`
+`$ npm install rub1cc/react-native-mock-location-detector --save`
 
 ### Mostly automatic installation
 
