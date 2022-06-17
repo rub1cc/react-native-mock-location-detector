@@ -20,6 +20,6 @@
     "url": "git://github.com/adkandari/react-native-mock-location-detector.git"
   },
   "peerDependencies": {
-    "react-native": "^0.41.2"
+    "react-native": "^0.66.3"
   }
 }
