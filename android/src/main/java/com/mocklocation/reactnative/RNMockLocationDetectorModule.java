@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.HashMap;
 import android.Manifest;
 import android.content.Context;
+import androidx.core.content.ContextCompat;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -21,6 +22,7 @@ import android.os.Build;
 import android.provider.Settings;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import android.app.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,9 +54,14 @@ public class RNMockLocationDetectorModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void checkMockLocationProvider(final Promise promise) {
       this.promise = promise;
-        if (ActivityCompat.checkSelfPermission(getCurrentActivity(),
+       Activity currentActivity = getCurrentActivity();
+        if (currentActivity == null) {
+            promise.reject("E_ACTIVITY_DOES_NOT_EXIST", "Activity doesn't exist");
+            return;
+        }
+        if (ContextCompat.checkSelfPermission(currentActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(getCurrentActivity(),
+           ContextCompat.checkSelfPermission(currentActivity,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
